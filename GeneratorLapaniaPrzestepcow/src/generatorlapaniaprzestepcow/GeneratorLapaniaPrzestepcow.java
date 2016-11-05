@@ -21,5 +21,4 @@ public class GeneratorLapaniaPrzestepcow {
         DataFactory dataFactory = new DataFactory();
         dataFactory.doYourJob();
     }
-    
 }
