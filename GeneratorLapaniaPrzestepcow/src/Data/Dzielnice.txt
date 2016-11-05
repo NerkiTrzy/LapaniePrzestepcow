@@ -1,0 +1,31 @@
+1 Aniołki
+2 Brętowo
+3 Brzeźno
+4 Chełm
+5 Jasień
+6 Kokoszki
+7 Letnica
+8 Matarnia
+9 Młyniska
+10 Nowy Port
+11 Oliwa
+12 Olszynka
+13 Osowa
+14 Piecki-Migowo
+15 Przeróbka
+16 Przymorze Małe
+17 Przymorze Wielki
+18 Rudniki
+19 Siedlce
+20 Stogi
+21 Strzyża
+22 Suchanino
+23 Śródmieście
+24 Ujeścisko-Łostowice
+25 Wrzeszcz Dolny
+26 Wrzeszcz Górny
+27 Wyspa Sobieszewska
+28 Wzgórze Mickiewicza
+29 Zaspa-Młyniec
+30 Zaspa-Rozstaje
+31 Żabianka
