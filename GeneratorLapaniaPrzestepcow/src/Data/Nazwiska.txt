@@ -3144,7 +3144,6 @@ Drogowski
 Drogoś
 Drohomirecki
 Dronia
-Drop
 Dropiński
 Drosik
 Drost
@@ -13268,7 +13267,6 @@ Preś
 Priebe
 Prill
 Probierz
-Proc
 Procajło
 Procek
 Proch

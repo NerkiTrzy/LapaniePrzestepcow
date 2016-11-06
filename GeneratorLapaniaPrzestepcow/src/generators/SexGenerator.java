@@ -28,8 +28,8 @@ public class SexGenerator implements Generator{
     @Override
     public void createData() {
         dataLoader.writeDataToFile("--TABLE : Plec");
-        dataLoader.writeDataToFile(insert.createInsertQuery("Plec", "Nazwa", "Mężczyzna"));
-        dataLoader.writeDataToFile(insert.createInsertQuery("Plec", "Nazwa", "Kobieta"));
+        dataLoader.writeDataToFile(insert.createInsertQuery("Plec", "Nazwa", "'Mężczyzna'"));
+        dataLoader.writeDataToFile(insert.createInsertQuery("Plec", "Nazwa", "'Kobieta'"));
         dataLoader.writeDataToFile("go");    }
     
 }

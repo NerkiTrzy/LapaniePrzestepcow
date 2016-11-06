@@ -68,17 +68,17 @@ public class PersonGenerator implements Generator{
                 
                 itr = iterator.next();
                 values.clear();
-                values.add(generatePesel(i+1,true));
-                values.add(men.get(i%men.size()));
-                values.add(itr);
+                values.add("'"+generatePesel(i+1,true)+"'");
+                values.add("'"+men.get(i%men.size())+"'");
+                values.add("'"+itr+"'");
                 values.add("1");                
      
                 dataLoader.writeDataToFile(insert.createInsertQuery("Osoba", params, values));
                 
                 values.clear();
-                values.add(generatePesel(i+1,false));
-                values.add(women.get(i%women.size()));
-                values.add(itr);
+                values.add("'"+generatePesel(i+1,false)+"'");
+                values.add("'"+women.get(i%women.size())+"'");
+                values.add("'"+itr+"'");
                 values.add("2");                
      
                 dataLoader.writeDataToFile(insert.createInsertQuery("Osoba", params, values));

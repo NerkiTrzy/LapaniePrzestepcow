@@ -57,7 +57,7 @@ public class PlaceGenerator implements Generator{
                 for (int i = 1; i <= 15; i++) {
                     values.remove(2);
                     values.add(String.valueOf(i));
-                    dataLoader.writeDataToFile(insert.createInsertQuery("Dzielnica", params, values));
+                    dataLoader.writeDataToFile(insert.createInsertQuery("Miejsce", params, values));
                 }   
             }
         } catch (IOException ex) {

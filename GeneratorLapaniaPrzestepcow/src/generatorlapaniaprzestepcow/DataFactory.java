@@ -28,14 +28,15 @@ class DataFactory {
         Files.createFile(file);
         
         listOfGenerators = new ArrayList<>();
-        listOfGenerators.add(new PersonGenerator(file));
-        listOfGenerators.add(new PersonGenerator(file));
-        listOfGenerators.add(new SkinColorGenerator(file));
         listOfGenerators.add(new SexGenerator(file));
-        listOfGenerators.add(new DistrictGenerator(file));
         listOfGenerators.add(new RatingGenerator(file));
         listOfGenerators.add(new CrimeTypeGenerator(file));
+        listOfGenerators.add(new DistrictGenerator(file));
+        listOfGenerators.add(new CrimeTypeGenerator(file));
+        listOfGenerators.add(new SkinColorGenerator(file));
         listOfGenerators.add(new PlaceGenerator(file));
+        listOfGenerators.add(new PersonGenerator(file));
+        
     }
     
     void doYourJob() {        
