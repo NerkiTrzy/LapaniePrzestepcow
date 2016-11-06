@@ -27,6 +27,20 @@ class DataFactory {
         Files.delete(file);
         Files.createFile(file);
         
+        Path personFile = Paths.get("src\\Data\\personInsert.sql");
+        if(Files.exists(personFile)) 
+            Files.delete(personFile);
+        Files.createFile(personFile);
+        
+        Path criminalFile = Paths.get("src\\Data\\criminal.bulk");
+        if(Files.exists(criminalFile)) 
+            Files.delete(criminalFile);
+        Files.createFile(criminalFile);
+        
+        Path reportFile = getFile("src\\Data\\report.bulk");
+        Path placeFile = getFile("src\\Data\\place.sql");
+        Path eventFile = getFile("src\\Data\\event.bulk");
+        
         listOfGenerators = new ArrayList<>();
         listOfGenerators.add(new SexGenerator(file));
         listOfGenerators.add(new RatingGenerator(file));
@@ -34,8 +48,14 @@ class DataFactory {
         listOfGenerators.add(new DistrictGenerator(file));
         listOfGenerators.add(new CrimeTypeGenerator(file));
         listOfGenerators.add(new SkinColorGenerator(file));
-        listOfGenerators.add(new PlaceGenerator(file));
-        listOfGenerators.add(new PersonGenerator(file));
+        
+        listOfGenerators.add(new PlaceGenerator(placeFile));
+        listOfGenerators.add(new PersonGenerator(personFile));
+        
+        listOfGenerators.add(new CriminalGenerator(criminalFile));
+        listOfGenerators.add(new ReportGenerator(reportFile));
+        
+        listOfGenerators.add(new EventGenerator(eventFile));
         
     }
     
@@ -43,6 +63,14 @@ class DataFactory {
         for(Generator g : listOfGenerators){
             g.createData();
         }
+    }
+    
+    private Path getFile(String path) throws IOException {
+        Path file = Paths.get(path);
+        if(Files.exists(file)) 
+            Files.delete(file);
+        Files.createFile(file);
+        return file;
     }
     
 }
