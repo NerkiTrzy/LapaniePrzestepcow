@@ -22,20 +22,14 @@ class DataFactory {
     public List<Generator> listOfGenerators;
     
     public DataFactory() throws IOException{
-        Path file = Paths.get("src\\Data\\LadowanieDanych.txt");
+        Path file = Paths.get("src\\Data\\LadowanieDanych.sql");
         
         Files.delete(file);
         Files.createFile(file);
         
-        Path personFile = Paths.get("src\\Data\\personInsert.sql");
-        if(Files.exists(personFile)) 
-            Files.delete(personFile);
-        Files.createFile(personFile);
+        Path personFile = getFile("src\\Data\\person.bulk");
         
-        Path criminalFile = Paths.get("src\\Data\\criminal.bulk");
-        if(Files.exists(criminalFile)) 
-            Files.delete(criminalFile);
-        Files.createFile(criminalFile);
+        Path criminalFile = getFile("src\\Data\\criminal.bulk");
         
         Path reportFile = getFile("src\\Data\\report.bulk");
         Path placeFile = getFile("src\\Data\\place.sql");

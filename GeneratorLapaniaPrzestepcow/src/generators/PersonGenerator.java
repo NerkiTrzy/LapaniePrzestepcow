@@ -7,7 +7,9 @@ package generators;
 
 import SQLNames.SQLInsert;
 import generatorlapaniaprzestepcow.DataLoader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -29,67 +31,88 @@ public class PersonGenerator implements Generator{
     
     private SQLInsert insert;
     
-    private DataLoader dataLoader;
+    //private DataLoader dataLoader;
+    private static final String DELIMITER = "|";
     
     private Random generator;
 
     public PersonGenerator(Path file)
     {
         insert = new SQLInsert();
-        dataLoader = new DataLoader(file);
+        //dataLoader = new DataLoader(file);
         generator = new Random();
     }
 
     @Override
     public void createData() {
-        dataLoader.writeDataToFile("--TABLE : Osoba");
-        
-        String itr = "";
-        List<String> params = new ArrayList<>();
-        
-        params.addAll(Arrays.asList("Pesel","Imie","Nazwisko","FK_Plec"));
-        
-        List<String> values = new ArrayList<>();
-        
-        List<String> men = new ArrayList<>();
-        List<String> women = new ArrayList<>();
+        try {
+            FileWriter fileWriter = new FileWriter("src\\Data\\person.bulk");
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
-        try {
-            men = Files.readAllLines(Paths.get("src\\Data\\male_names.txt"),Charset.defaultCharset());
-            women = Files.readAllLines(Paths.get("src\\Data\\female_names.txt"),Charset.defaultCharset());
-        } catch (IOException ex) {
-            Logger.getLogger(PersonGenerator.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            int i = 0;
-            Iterator<String> iterator = Files.lines(Paths.get("src\\Data\\Nazwiska.txt")).iterator();
-            while(iterator.hasNext())
-            {
-                
-                itr = iterator.next();
-                values.clear();
-                values.add("'"+generatePesel(i+1,true)+"'");
-                values.add("'"+men.get(i%men.size())+"'");
-                values.add("'"+itr+"'");
-                values.add("1");                
-     
-                dataLoader.writeDataToFile(insert.createInsertQuery("Osoba", params, values));
-                
-                values.clear();
-                values.add("'"+generatePesel(i+1,false)+"'");
-                values.add("'"+women.get(i%women.size())+"'");
-                values.add("'"+itr+"'");
-                values.add("2");                
-     
-                dataLoader.writeDataToFile(insert.createInsertQuery("Osoba", params, values));
-                  
-                i++;
+
+            //dataLoader.writeDataToFile("--TABLE : Osoba");
+
+            String itr = "";
+            List<String> params = new ArrayList<>();
+
+            params.addAll(Arrays.asList("Pesel","Imie","Nazwisko","FK_Plec"));
+
+            List<String> values = new ArrayList<>();
+
+            List<String> men = new ArrayList<>();
+            List<String> women = new ArrayList<>();
+
+            try {
+                men = Files.readAllLines(Paths.get("src\\Data\\male_names.txt"),Charset.defaultCharset());
+                women = Files.readAllLines(Paths.get("src\\Data\\female_names.txt"),Charset.defaultCharset());
+            } catch (IOException ex) {
+                Logger.getLogger(PersonGenerator.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (IOException ex) {
-            Logger.getLogger(DistrictGenerator.class.getName()).log(Level.SEVERE, null, ex);
-        }   
-        
-        dataLoader.writeDataToFile("go");    
+            try {
+                int i = 0;
+                int id = 0;
+                Iterator<String> iterator = Files.lines(Paths.get("src\\Data\\Nazwiska.txt")).iterator();
+                while(iterator.hasNext())
+                {
+
+                    itr = iterator.next();
+                    values.clear();
+//                    values.add("'"+generatePesel(i+1,true)+"'");
+//                    values.add("'"+men.get(i%men.size())+"'");
+//                    values.add("'"+itr+"'");
+//                    values.add("1");       
+                    ++id;
+                    bufferedWriter.write(String.valueOf(id) + DELIMITER +
+                            generatePesel(i+1,true) + DELIMITER +
+                            men.get(i%men.size()) + DELIMITER +
+                            itr + DELIMITER + 
+                            "1" + "\n");
+                    //dataLoader.writeDataToFile(insert.createInsertQuery("Osoba", params, values));
+
+//                    values.clear();
+//                    values.add("'"+generatePesel(i+1,false)+"'");
+//                    values.add("'"+women.get(i%women.size())+"'");
+//                    values.add("'"+itr+"'");
+//                    values.add("2");      
+                    ++id;
+                    bufferedWriter.write(String.valueOf(id) + DELIMITER +
+                            generatePesel(i+1,false) + DELIMITER +
+                            women.get(i%women.size()) + DELIMITER +
+                            itr + DELIMITER + 
+                            "2" + "\n");
+                    //dataLoader.writeDataToFile(insert.createInsertQuery("Osoba", params, values));
+
+                    i++;
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(DistrictGenerator.class.getName()).log(Level.SEVERE, null, ex);
+            }   
+
+            //dataLoader.writeDataToFile("go");    
+            bufferedWriter.close();
+        } catch (IOException e) {
+            Logger.getLogger(DistrictGenerator.class.getName()).log(Level.SEVERE, null, e);
+        }
     }
     
     private String generatePesel(int index, boolean man){

@@ -108,7 +108,7 @@ public class EventGenerator implements Generator{
         BufferedReader reader;
         int lines = 0;
         try {
-            reader = new BufferedReader(new FileReader("src\\Data\\place.sql"));
+            reader = new BufferedReader(new FileReader("src\\Data\\place.bulk"));
 
             while (reader.readLine() != null) lines++;
             reader.close();
