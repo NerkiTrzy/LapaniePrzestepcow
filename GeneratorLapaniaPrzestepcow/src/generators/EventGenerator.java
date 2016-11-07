@@ -54,7 +54,7 @@ public class EventGenerator implements Generator{
             for(int i = 0; i < EVENT_COUNT; i++) {
 
                 String id = String.valueOf(i+1);
-                String policeman = getNotCriminalKey(personCount);
+                String policeman = String.valueOf(generator.nextInt(50) + 1); //= getNotCriminalKey(personCount); // first 50 persons in table are policemen
                 String placeId = String.valueOf(generator.nextInt(placeCount)+1);
                 String rate = String.valueOf(generator.nextInt(3)+1);
                 String criminal = String.valueOf(generator.nextInt(criminalCount)+1);

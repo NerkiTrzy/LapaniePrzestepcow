@@ -56,7 +56,7 @@ public class ReportGenerator implements Generator{
 
                 String date = getDateString(year, month, day);
 
-                int fk_reportingPerson = generator.nextInt(personCount) + 1;
+                int fk_reportingPerson = generator.nextInt(personCount-50) + 51; //first 50 people will be policemans
                 if(fk_reportingPerson % 10 == 0) // criminals dont get along with Mighty Police
                     fk_reportingPerson += generator.nextInt(9) + 1;
                 String reportingPerson = String.valueOf(fk_reportingPerson);        

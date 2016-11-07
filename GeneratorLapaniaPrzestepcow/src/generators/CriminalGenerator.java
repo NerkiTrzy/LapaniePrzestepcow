@@ -40,7 +40,7 @@ public class CriminalGenerator implements Generator{
     @Override
     public void createData() {
         int personCount = getPersonCount();
-        int count = 0;
+        int count = 60;
         int i = 1;
         while(count < personCount) {
             String id = String.valueOf(i);

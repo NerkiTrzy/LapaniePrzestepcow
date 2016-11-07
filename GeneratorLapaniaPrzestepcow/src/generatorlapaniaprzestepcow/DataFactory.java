@@ -51,6 +51,8 @@ class DataFactory {
         
         listOfGenerators.add(new EventGenerator(eventFile));
         
+        listOfGenerators.add(new PolicemenExcelGenerator(null));
+        
     }
     
     void doYourJob() {        
