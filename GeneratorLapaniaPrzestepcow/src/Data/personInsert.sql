@@ -1,3 +1,5 @@
+USE LapaniePrzestepcow
+GO
 --TABLE : Osoba
 INSERT INTO Osoba(Pesel,Imie,Nazwisko,FK_Plec) VALUES('71010800185','Adam','Abel',1);
 INSERT INTO Osoba(Pesel,Imie,Nazwisko,FK_Plec) VALUES('72032400191','Ada','Abel',2);

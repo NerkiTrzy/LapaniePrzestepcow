@@ -6,6 +6,7 @@
 package generators;
 
 import SQLNames.SQLInsert;
+import SQLNames.SQLUpdate;
 import generatorlapaniaprzestepcow.DataLoader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -31,15 +32,18 @@ public class PersonGenerator implements Generator{
     
     private SQLInsert insert;
     
-    //private DataLoader dataLoader;
+    private DataLoader dataLoader;
     private static final String DELIMITER = "|";
     
     private Random generator;
 
-    public PersonGenerator(Path file)
+    public PersonGenerator(Path file) throws IOException
     {
+        Path path2 = Paths.get("src\\Data\\LadowanieDanych2.sql");
         insert = new SQLInsert();
-        //dataLoader = new DataLoader(file);
+        Files.delete(path2);
+        Files.createFile(path2);
+        dataLoader = new DataLoader(path2);
         generator = new Random();
     }
 
@@ -113,6 +117,55 @@ public class PersonGenerator implements Generator{
         } catch (IOException e) {
             Logger.getLogger(DistrictGenerator.class.getName()).log(Level.SEVERE, null, e);
         }
+        
+        createData2();
+        
+    }
+    
+    private void createData2(){
+        SQLUpdate update = new SQLUpdate();
+        
+        dataLoader.writeDataToFile("--TABLE : Osoba");
+
+        String itr = "";
+        
+        List<String> params = new ArrayList<>();
+        params.addAll(Arrays.asList("Nazwisko"));
+        
+        List<String> condParams = new ArrayList<>();
+        condParams.addAll(Arrays.asList("Nazwisko","FK_Plec"));
+
+        List<String> values = new ArrayList<>();
+        List<String> condValues = new ArrayList<>();
+
+        try {
+            int i = 0;
+            Iterator<String> iterator = Files.lines(Paths.get("src\\Data\\Nazwiska.txt")).iterator();
+            while(iterator.hasNext())
+            {
+                itr = iterator.next();
+                values.clear();
+                condValues.clear();
+                
+                condValues.add("'" + itr + "'");
+                condValues.add("2");
+                
+                itr = iterator.next();
+                
+                values.add("'" + itr + "'");
+                
+                dataLoader.writeDataToFile(update.createUpdateQuery("Osoba", params, values, condParams, condValues));
+
+                i++;
+                if (i >= 85) {
+                    break;
+                }
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(DistrictGenerator.class.getName()).log(Level.SEVERE, null, ex);
+        }   
+
+        dataLoader.writeDataToFile("go");            
     }
     
     private String generatePesel(int index, boolean man){

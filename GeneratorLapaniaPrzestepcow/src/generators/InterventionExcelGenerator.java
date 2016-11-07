@@ -93,6 +93,43 @@ public class InterventionExcelGenerator implements Generator{
         } catch (IOException ex) {
             Logger.getLogger(EventGenerator.class.getName()).log(Level.SEVERE, null, ex);
         }
+        createData2();
+    }
+    
+    public void createData2() {
+        try {
+            FileWriter fileWriter = new FileWriter("src\\Data\\intervention2.csv");
+        
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        
+            bufferedWriter.write("Czas trwania interwencji;Model samochodu;Liczba rannych;"
+                    + "Liczba zabitych;Najwyzszy stopien;Stan warunkow atmosferycznych;"
+                    + "Okres swiateczny" + "\n");
+            
+            
+            
+            for(int i = 0; i < INTERVENTIONS_COUNT - 100; ++i) {
+
+                String duration = String.valueOf(generator.nextInt(3600) + 360);
+                String carModel = CAR_MODELS[generator.nextInt(CAR_MODELS.length)];
+                String injured = String.valueOf(generator.nextInt(5));
+                String dead = String.valueOf(generator.nextInt(2));
+                String maxRank = RANKS[generator.nextInt(RANKS.length)];
+                String weather = WEATHER[generator.nextInt(WEATHER.length)];
+                String duringHoliday = String.valueOf(generator.nextInt(2));
+                
+                bufferedWriter.write(duration + DELIMITER +
+                        carModel + DELIMITER +
+                        injured + DELIMITER +
+                        dead + DELIMITER +
+                        maxRank + DELIMITER +
+                        weather + DELIMITER +
+                        duringHoliday + DELIMITER + "\n");
+            }
+            bufferedWriter.close();
+        } catch (IOException ex) {
+            Logger.getLogger(EventGenerator.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

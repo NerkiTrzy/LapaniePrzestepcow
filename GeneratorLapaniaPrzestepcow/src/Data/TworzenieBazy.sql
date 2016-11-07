@@ -1,10 +1,13 @@
+CREATE DATABASE LapaniePrzestepcow
+go
+
 USE LapaniePrzestepcow
 GO
 
 CREATE TABLE Kolor_Skory
 (
     ID_Kolor_Skory INTEGER IDENTITY(1,1) PRIMARY KEY, /* Generuje klucz rozpoczynaj¹c o 1 i zwiêksza go za ka¿dym razem o 1*/
-	Kolor VARCHAR(20) NOT NULL, /*PESEL*/
+	Kolor VARCHAR(20) NOT NULL, 
 )
 GO
 
@@ -62,7 +65,7 @@ CREATE TABLE Miejsce
 (
 	ID_Miejsce INTEGER IDENTITY(1,1) PRIMARY KEY,
 	FK_Dzielnica INTEGER FOREIGN KEY REFERENCES Dzielnica NOT NULL,
-	Nazwa_Ulicy VARCHAR(60) NOT NULL,
+	Nazwa_Ulicy VARCHAR(100) NOT NULL,
 	Numer VARCHAR(20),
 )
 GO

@@ -29,6 +29,7 @@ public class EventGenerator implements Generator{
     private static final String DELIMITER = "|";
     
     private static final int EVENT_COUNT = 1000000;
+    private static final int EVENT_COUNT2 = 250000;
     private Random generator;
     
     public EventGenerator(Path file)
@@ -40,7 +41,6 @@ public class EventGenerator implements Generator{
 
     @Override
     public void createData() {
-        
         
         try {
             FileWriter fileWriter;
@@ -73,8 +73,44 @@ public class EventGenerator implements Generator{
         } catch (IOException ex) {
             Logger.getLogger(EventGenerator.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        createData2();
     }
     
+    public void createData2() {
+        
+        try {
+            FileWriter fileWriter;
+            fileWriter = new FileWriter("src\\Data\\event2.bulk");
+        
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
+            int personCount = getPersonCount();
+            int placeCount = getPlaceCount();
+            int criminalCount = getCriminalCount();
+            for(int i = 2 * EVENT_COUNT; i < 2*EVENT_COUNT + EVENT_COUNT2; i++) {
+
+                String id = String.valueOf(i+1);
+                String policeman = String.valueOf(generator.nextInt(50) + 1); //= getNotCriminalKey(personCount); // first 50 persons in table are policemen
+                String placeId = String.valueOf(generator.nextInt(placeCount)+1);
+                String rate = String.valueOf(generator.nextInt(3)+1);
+                String criminal = String.valueOf(generator.nextInt(criminalCount)+1);
+                String crimeType = String.valueOf(generator.nextInt(7)+1);
+                
+                bufferedWriter.write(id + DELIMITER +
+                        id + DELIMITER +
+                        policeman + DELIMITER +
+                        placeId + DELIMITER + 
+                        rate + DELIMITER +
+                        criminal + DELIMITER +
+                        crimeType + "\n");
+            }
+            bufferedWriter.close();
+        
+        } catch (IOException ex) {
+            Logger.getLogger(EventGenerator.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     private int getPersonCount() {
         BufferedReader reader;
