@@ -40,7 +40,11 @@ class DataFactory {
         Path placeFile = getFile("src\\Data\\place.sql");
         Path eventFile = getFile("src\\Data\\event.bulk");
         
+        Path rubbishFile = getFile("src\\Data\\rubbish.sql");
+        
         listOfGenerators = new ArrayList<>();
+        
+        listOfGenerators.add(new RubbishGenerator(rubbishFile));
         listOfGenerators.add(new SexGenerator(file));
         listOfGenerators.add(new RatingGenerator(file));
         listOfGenerators.add(new CrimeTypeGenerator(file));
@@ -64,6 +68,9 @@ class DataFactory {
         
         dataLoader2 = new DataLoader(file2);
         dataLoader2.writeDataToFile("USE LapaniePrzestepcow\nGO");
+        
+        
+        
     }
     
     void doYourJob() {        

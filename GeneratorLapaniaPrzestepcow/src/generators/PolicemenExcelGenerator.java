@@ -183,10 +183,22 @@ public class PolicemenExcelGenerator implements Generator {
     private String getDateString(int year, int month, int day) {
         StringBuilder result = new StringBuilder();
         result.append(String.valueOf(year))
-                .append("-")
-                .append(String.valueOf(month))
-                .append("-")
-                .append(String.valueOf(day));
+                .append("-");
+        if (month < 10) {
+            result.append("0" + String.valueOf(month));
+                
+        }
+        else{
+            result.append(String.valueOf(month));
+        }
+        result.append("-");
+        if (day < 10) {
+            result.append("0" + String.valueOf(day));
+        }
+        else{
+            result.append(String.valueOf(day));
+        }   
+                
         return result.toString();        
     }
 }

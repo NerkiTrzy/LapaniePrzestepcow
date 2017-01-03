@@ -5,6 +5,7 @@
  */
 package generatorlapaniaprzestepcow;
 
+import SQLNames.SQLInsert;
 import java.io.IOException;
 
 /**
@@ -18,6 +19,7 @@ public class GeneratorLapaniaPrzestepcow {
      */
     public static void main(String[] args) throws IOException {
         // TODO code application logic here
+        
         DataFactory dataFactory = new DataFactory();
         dataFactory.doYourJob();
     }
